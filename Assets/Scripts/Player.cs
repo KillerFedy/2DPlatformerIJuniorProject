@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private int _speed;
     [SerializeField] private int _jumpSpeed;
+    [SerializeField] private Transform _startPoint;
 
     private float _xAxisPlayerMovement;
     private Rigidbody2D _playerRigidbody;
@@ -20,5 +21,10 @@ public class Player : MonoBehaviour
         _playerRigidbody.velocity = new Vector2(_xAxisPlayerMovement * _speed, _playerRigidbody.velocity.y);
         if (Input.GetKeyDown(KeyCode.Space))
             _playerRigidbody.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Force);
+    }
+
+    public void ReturnToStartPoint()
+    {
+        transform.position = _startPoint.position;
     }
 }

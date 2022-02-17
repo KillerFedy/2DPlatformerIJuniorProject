@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coin: {fileID: 7099754101776551847, guid: 0c54cc41a4927264a8fc8042b2a22332, type: 3}
-  _timeoSpawn: 2
+  _timeoSpawn: 7
