@@ -9,11 +9,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _startPoint;
     [SerializeField] private Rigidbody2D _playerRigidbody;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Animator _animator;
 
     private float _xAxisPlayerMovement;
     private void Update()
     {
         _xAxisPlayerMovement = Input.GetAxis("Horizontal");
+        _animator.SetBool("isWalking", _xAxisPlayerMovement != 0);
         SetCharacterDirection(_xAxisPlayerMovement);
         _playerRigidbody.velocity = new Vector2(_xAxisPlayerMovement * _speed, _playerRigidbody.velocity.y);
         if (Input.GetKeyDown(KeyCode.Space))
