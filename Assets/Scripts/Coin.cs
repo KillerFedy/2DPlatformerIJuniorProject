@@ -1,21 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Coin : MonoBehaviour
 {
-    private CoinSpawner _spawner;
-
-    public void InitSpawner(CoinSpawner spawner)
-    {
-        _spawner = spawner;
-    }
+    public event UnityAction OnCoinTook;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.TryGetComponent<Player>(out Player player))
         {
-            _spawner.StartCoroutine(_spawner.SpawnCoin());
+            OnCoinTook();
             Destroy(gameObject);
         }
     }

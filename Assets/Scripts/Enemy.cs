@@ -23,12 +23,4 @@ public class Enemy : MonoBehaviour
                 _indexCurrentPoint = 0;
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player))
-        {
-            player.ReturnToStartPoint();
-        }
-    }
 }

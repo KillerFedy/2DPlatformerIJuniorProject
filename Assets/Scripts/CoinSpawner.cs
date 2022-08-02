@@ -5,17 +5,28 @@ using UnityEngine;
 public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coin;
-    [SerializeField] private int _timeoSpawn;
+    [SerializeField] private int _timeOfSpawn;
+
+    private Coin _currentActiveCoin;
 
     private void Start()
     {
-        StartCoroutine(SpawnCoin());    
+        StartCoroutine(SpawnCoinCoroutine());    
     }
 
-    public IEnumerator SpawnCoin()
+    private IEnumerator SpawnCoinCoroutine()
     {
-        yield return new WaitForSeconds(_timeoSpawn);
-        Coin coin = Instantiate(_coin, transform.position, Quaternion.identity, transform);
-        coin.InitSpawner(this);
+        if(_currentActiveCoin != null)
+        {
+            _currentActiveCoin.OnCoinTook -= SpawnCoin;
+        }
+        yield return new WaitForSeconds(_timeOfSpawn);
+        _currentActiveCoin = Instantiate(_coin, transform.position, Quaternion.identity);
+        _currentActiveCoin.OnCoinTook += SpawnCoin;
+    }
+
+    private void SpawnCoin()
+    {
+        StartCoroutine(SpawnCoinCoroutine());
     }
 }

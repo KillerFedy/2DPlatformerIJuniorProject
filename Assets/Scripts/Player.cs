@@ -23,8 +23,16 @@ public class Player : MonoBehaviour
             _playerRigidbody.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Force);
     }
 
-    public void ReturnToStartPoint()
+    private void ReturnToStartPoint()
     {
         transform.position = _startPoint.position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            ReturnToStartPoint();
+        }
     }
 }
