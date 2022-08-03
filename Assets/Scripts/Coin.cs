@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class Coin : MonoBehaviour
 {
-    public event UnityAction OnCoinTook;
+    public event UnityAction CoinTook;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.TryGetComponent<Player>(out Player player))
         {
-            OnCoinTook();
+            CoinTook();
             Destroy(gameObject);
         }
     }

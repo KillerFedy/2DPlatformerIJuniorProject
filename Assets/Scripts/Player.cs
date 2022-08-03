@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private int _speed;
     [SerializeField] private int _jumpSpeed;
-    [SerializeField] private Transform _startPoint;
     [SerializeField] private Rigidbody2D _playerRigidbody;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Animator _animator;
@@ -22,23 +21,11 @@ public class Player : MonoBehaviour
             _playerRigidbody.AddForce(Vector2.up * _jumpSpeed, ForceMode2D.Force);
     }
 
-    private void ReturnToStartPoint()
-    {
-        transform.position = _startPoint.position;
-    }
-
     private void SetCharacterDirection(float xAxis)
     {
         if(xAxis != 0)
         {
             _spriteRenderer.flipX = xAxis > 0;
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
-        {
-            ReturnToStartPoint();
         }
     }
 }

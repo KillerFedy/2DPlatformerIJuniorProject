@@ -18,11 +18,11 @@ public class CoinSpawner : MonoBehaviour
     {
         if(_currentActiveCoin != null)
         {
-            _currentActiveCoin.OnCoinTook -= SpawnCoin;
+            _currentActiveCoin.CoinTook -= SpawnCoin;
         }
         yield return new WaitForSeconds(_timeOfSpawn);
         _currentActiveCoin = Instantiate(_coin, transform.position, Quaternion.identity);
-        _currentActiveCoin.OnCoinTook += SpawnCoin;
+        _currentActiveCoin.CoinTook += SpawnCoin;
     }
 
     private void SpawnCoin()
